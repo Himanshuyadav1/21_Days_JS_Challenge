@@ -1,0 +1,39 @@
+Day - 4:
+---------
+Math.floor(num) --> decimal num s interger part nikal skte hai.
+decimalNum.toFixed(10) --> isse hum decimal k baad digits ki length ko fix krte h.
+Number(decimalNum) --> isse hum decimal k baad k last zeros ko hta sakte h.
+
+Day - 5: 
+----------
+
+Problem 1: Factors of a Number
+-----------------------------------
+
+Kisi num ka factors nikalne k liye hume num k sqrt tak factors ko check krna padega aur baki factors ko pta krne k liye uska pair khoj lenge jo num ko pahle waale factors s divide krne p mil jayega.
+
+-------------------
+
+Problem 3: Find the HCF (Highest Common Factor) or GCD(Greatest Common Divisor) of Two Numbers
+----------------------------------------------------------------------------
+
+Euclidean algorithm for gcd
+------------------------------
+isme chhote wale num s bade waale ko divide krte h aur jo remainder aata h usse chhote waale number ko divide krte h fir jo remainder aayega usse pichle waale dividend ko divide krte h aise krte hue jab remainder 0 aa jaye to last waala Divisor hi GCD ya HCF hota h.
+
+-------------------------------------------
+
+
+Problem 4: LCM (Least Common Multiple) of Two Numbers
+-----------------------------------------------------------
+
+LCM = (num1 * num2) / HCF
+---------------------------
+
+
+Day - 6: 
+----------
+
+Problem 5: Check if a Number Belongs to the Fibonacci Series
+-----------------------------------------------------------------
+Ager (5 * num^2 + 4) or (5 * num^2 - 4) perfect square ho to ye num Belong krega.
