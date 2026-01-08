@@ -313,40 +313,132 @@
 // Solution 4:
 // -----------------
 
+// function handleSubmit(e) {
+//     e.preventDefault();
+
+//     let num = parseInt(e.target[0].value);    
+//     const resultPara = document.getElementById('result');
+//     const primeFactors = [1];
+//     let isUglyNumber = false;
+
+//     while (num % 2 === 0) {
+//         primeFactors.push(2);
+//         num /= 2;
+//     }
+
+//     let factor = 3;
+
+//     while (factor <= Math.sqrt(num)) {
+//         while (num % factor === 0) {
+//             primeFactors.push(factor);
+//             num /= factor;
+//         }
+//         if (primeFactors[primeFactors.length - 1] >= 7) {
+//             break;
+//         }
+//         factor += 2;
+//     }
+    
+//     if (num > 2) {
+//         primeFactors.push(num);
+//     }
+
+//     isUglyNumber = !primeFactors.some(n => n >= 7);
+
+//     resultPara.textContent =  `${isUglyNumber ? 'Ugly Number' : 'Not Ugly Number'}`;
+//     e.target[0].value = "";
+// }
+
+// -----------------
+
+
+// Solution 5:
+// -----------------
+
+// function handleSubmit(e) {
+//     e.preventDefault();
+
+//     const num = parseInt(e.target[0].value);    
+//     const resultPara = document.getElementById('result');
+//     let squareOfNum = num ** 2;
+//     let isKaprekarNumber = num === 1;
+
+//     if (String(squareOfNum).length % 2 === 0) {
+//         const firstPart = Math.floor(squareOfNum / (10 ** (String(squareOfNum).length / 2)));
+//         const secondPart = squareOfNum % (10 ** (String(squareOfNum).length / 2));
+
+//         isKaprekarNumber = num === firstPart + secondPart;
+//     }
+
+//     resultPara.textContent =  `${isKaprekarNumber ? 'Kaprekar Number' : 'Not Kaprekar Number'}`;
+//     e.target[0].value = "";
+// }
+
+// -----------------
+
+
+// Solution 6:
+// -----------------
+
+// function handleSubmit(e) {
+//     e.preventDefault();
+
+//     let num = parseInt(e.target[0].value);    
+//     const resultPara = document.getElementById('result');
+//     const numbers = [];
+//     let isHappyNumber = numbers.includes(num);
+//     let loopCount = 0;
+    
+//     function getSumOfSquareOfDigits(num) {
+//         let sumOfSquareOfDigits = 0;
+
+//         while (num !== 0) {
+//             loopCount++;
+//             const lastDigit = num % 10;
+//             sumOfSquareOfDigits += lastDigit ** 2
+//             num = Math.floor(num / 10);            
+//         }
+
+//         return sumOfSquareOfDigits;
+//     }
+
+//     while (!numbers.includes(num)) {
+//         loopCount++;
+//         numbers.push(num);
+        
+//         num = getSumOfSquareOfDigits(num);
+        
+//         // check for Happy Number
+//         if (num === 1) {
+//             isHappyNumber = true;
+//             break;
+//         }
+//     }   
+
+//     resultPara.textContent =  `${isHappyNumber ? 'Happy Number' : 'Not Happy Number'} Count: ${loopCount}`;
+//     e.target[0].value = "";
+// }
+
+// -----------------
+
+
+// Solution 8:
+// -----------------
+
 function handleSubmit(e) {
     e.preventDefault();
 
-    let num = parseInt(e.target[0].value);    
+    let num1 = parseInt(e.target[0].value);    
+    let num2 = parseInt(e.target[1].value);    
     const resultPara = document.getElementById('result');
-    const primeFactors = [1];
-    let isUglyNumber = false;
-
-    while (num % 2 === 0) {
-        primeFactors.push(2);
-        num /= 2;
-    }
-
-    let factor = 3;
-
-    while (factor <= Math.sqrt(num)) {
-        while (num % factor === 0) {
-            primeFactors.push(factor);
-            num /= factor;
-        }
-        if (primeFactors[primeFactors.length - 1] >= 7) {
-            break;
-        }
-        factor += 2;
-    }
     
-    if (num > 2) {
-        primeFactors.push(num);
-    }
+    num1 = num1 + num2;
+    num2 = num1 - num2;
+    num1 = num1 - num2;
 
-    isUglyNumber = !primeFactors.some(n => n >= 7);
-
-    resultPara.textContent =  `${isUglyNumber ? 'Ugly Number' : 'Not Ugly Number'}`;
+    resultPara.textContent =  `First Number: ${num1} Second Number: ${num2}`;
     e.target[0].value = "";
+    e.target[1].value = "";
 }
 
 // -----------------
