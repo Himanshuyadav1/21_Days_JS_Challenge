@@ -62,6 +62,34 @@
 // Solution 3:
 // -----------------
 
+// function handleSubmit(e) {
+//     e.preventDefault();
+
+//     const inputString = e.target[0].value;
+//     const resultPara = document.getElementById('result');
+//     let characterCountObj = {};
+//     const stringLength = inputString.length;
+
+//     for (let i = 0; i < stringLength; i++) {
+//         characterCountObj[inputString[i]] = (characterCountObj[inputString[i]] || 0) + 1;
+//     }
+
+//     resultPara.textContent = '{';
+
+//     Object.entries(characterCountObj).forEach(([key, value]) => {
+//         resultPara.textContent += ` ${key}:${value}, `;
+//     })
+
+//     resultPara.textContent = resultPara.textContent.slice(0, -2) + " }";
+//     e.target[0].value = "";
+// }
+
+// -----------------
+
+
+// Solution 4:
+// -----------------
+
 function handleSubmit(e) {
     e.preventDefault();
 
@@ -69,18 +97,34 @@ function handleSubmit(e) {
     const resultPara = document.getElementById('result');
     let characterCountObj = {};
     const stringLength = inputString.length;
+    const mostFrequentChar = [];
+    let frequencyNum = 0;
 
     for (let i = 0; i < stringLength; i++) {
         characterCountObj[inputString[i]] = (characterCountObj[inputString[i]] || 0) + 1;
     }
 
-    resultPara.textContent = '{';
+    for (let key in characterCountObj) {        
+        if (frequencyNum === characterCountObj[key]) {
+            mostFrequentChar[mostFrequentChar.length] = key;
+            mostFrequentChar[mostFrequentChar.length] = characterCountObj[key];
+        }
 
-    Object.entries(characterCountObj).forEach(([key, value]) => {
-        resultPara.textContent += ` ${key}:${value}, `;
-    })
+        if (frequencyNum < characterCountObj[key]) {
+            frequencyNum = characterCountObj[key];
+            mostFrequentChar.length = 0;
+            mostFrequentChar[0] = key;
+            mostFrequentChar[1] = characterCountObj[key]
+        }
+    }
 
-    resultPara.textContent = resultPara.textContent.slice(0, -2) + " }";
+    resultPara.textContent = 'Most frequent:';
+
+    for (let i = 0; i < mostFrequentChar.length - 1; i = i + 2) {
+        resultPara.textContent += ` ${mostFrequentChar[i]} (${mostFrequentChar[i+1]} times),`;
+    }
+
+    resultPara.textContent = resultPara.textContent.slice(0, -1);
     e.target[0].value = "";
 }
 
