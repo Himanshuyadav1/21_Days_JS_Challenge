@@ -90,42 +90,78 @@
 // Solution 4:
 // -----------------
 
+// function handleSubmit(e) {
+//     e.preventDefault();
+
+//     const inputString = e.target[0].value;
+//     const resultPara = document.getElementById('result');
+//     let characterCountObj = {};
+//     const stringLength = inputString.length;
+//     const mostFrequentChar = [];
+//     let frequencyNum = 0;
+
+//     for (let i = 0; i < stringLength; i++) {
+//         characterCountObj[inputString[i]] = (characterCountObj[inputString[i]] || 0) + 1;
+//     }
+
+//     for (let key in characterCountObj) {        
+//         if (frequencyNum === characterCountObj[key]) {
+//             mostFrequentChar[mostFrequentChar.length] = key;
+//             mostFrequentChar[mostFrequentChar.length] = characterCountObj[key];
+//         }
+
+//         if (frequencyNum < characterCountObj[key]) {
+//             frequencyNum = characterCountObj[key];
+//             mostFrequentChar.length = 0;
+//             mostFrequentChar[0] = key;
+//             mostFrequentChar[1] = characterCountObj[key]
+//         }
+//     }
+
+//     resultPara.textContent = 'Most frequent:';
+
+//     for (let i = 0; i < mostFrequentChar.length - 1; i = i + 2) {
+//         resultPara.textContent += ` ${mostFrequentChar[i]} (${mostFrequentChar[i+1]} times),`;
+//     }
+
+//     resultPara.textContent = resultPara.textContent.slice(0, -1);
+//     e.target[0].value = "";
+// }
+
+// -----------------
+
+
+// Solution 5:
+// -----------------
+
 function handleSubmit(e) {
     e.preventDefault();
 
-    const inputString = e.target[0].value;
+    const firstInputString = e.target[0].value;
+    const secondInputString = e.target[1].value;
     const resultPara = document.getElementById('result');
-    let characterCountObj = {};
-    const stringLength = inputString.length;
-    const mostFrequentChar = [];
-    let frequencyNum = 0;
+    let areStringsAnagrams = firstInputString.length === secondInputString.length;
+    const firstStringCharacterCountObj = {};
+    const secondStringCharacterCountObj = {};
+    const stringLength = firstInputString.length;
+    let i = 0;
 
-    for (let i = 0; i < stringLength; i++) {
-        characterCountObj[inputString[i]] = (characterCountObj[inputString[i]] || 0) + 1;
+    while (areStringsAnagrams && i < stringLength) {
+        firstStringCharacterCountObj[firstInputString[i]] = (firstStringCharacterCountObj[firstInputString[i]] || 0) + 1;
+        secondStringCharacterCountObj[secondInputString[i]] = (secondStringCharacterCountObj[secondInputString[i]] || 0) + 1;
+        i++;
     }
 
-    for (let key in characterCountObj) {        
-        if (frequencyNum === characterCountObj[key]) {
-            mostFrequentChar[mostFrequentChar.length] = key;
-            mostFrequentChar[mostFrequentChar.length] = characterCountObj[key];
-        }
-
-        if (frequencyNum < characterCountObj[key]) {
-            frequencyNum = characterCountObj[key];
-            mostFrequentChar.length = 0;
-            mostFrequentChar[0] = key;
-            mostFrequentChar[1] = characterCountObj[key]
+    for (let key in firstStringCharacterCountObj) {
+        if (firstStringCharacterCountObj[key] !== secondStringCharacterCountObj[key]) {
+            areStringsAnagrams = false;
+            break;
         }
     }
 
-    resultPara.textContent = 'Most frequent:';
-
-    for (let i = 0; i < mostFrequentChar.length - 1; i = i + 2) {
-        resultPara.textContent += ` ${mostFrequentChar[i]} (${mostFrequentChar[i+1]} times),`;
-    }
-
-    resultPara.textContent = resultPara.textContent.slice(0, -1);
+    resultPara.textContent = `${areStringsAnagrams ? 'Anagram' : 'Not Anagram'}`;
     e.target[0].value = "";
+    e.target[1].value = "";
 }
 
 // -----------------
