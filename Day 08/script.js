@@ -170,6 +170,38 @@
 // Solution 6:
 // -----------------
 
+// function handleSubmit(e) {
+//     e.preventDefault();
+
+//     const inputString = e.target[0].value;
+//     const resultPara = document.getElementById('result');
+//     const stringLength = inputString.length;
+//     const characterCountObj = {};
+//     let firstNonRepeatingChar = "";
+
+//     for (let i = 0; i < stringLength; i++) {
+//         characterCountObj[inputString[i]] = (characterCountObj[inputString[i]] || 0) + 1;
+//     }
+
+//     for (let i = 0; i < stringLength; i++) {
+//         if (characterCountObj[inputString[i]] === 1) {
+//             firstNonRepeatingChar = inputString[i];
+//             break;
+//         }
+//     }
+
+//     resultPara.textContent = `${firstNonRepeatingChar}`;
+//     e.target[0].value = "";
+// }
+
+// -----------------
+
+
+// Practice Challenge
+
+// Solution 1:
+// -----------------
+
 function handleSubmit(e) {
     e.preventDefault();
 
@@ -177,20 +209,17 @@ function handleSubmit(e) {
     const resultPara = document.getElementById('result');
     const stringLength = inputString.length;
     const characterCountObj = {};
-    let firstNonRepeatingChar = "";
+    let newString = "";
 
     for (let i = 0; i < stringLength; i++) {
         characterCountObj[inputString[i]] = (characterCountObj[inputString[i]] || 0) + 1;
-    }
 
-    for (let i = 0; i < stringLength; i++) {
         if (characterCountObj[inputString[i]] === 1) {
-            firstNonRepeatingChar = inputString[i];
-            break;
+            newString += inputString[i];
         }
     }
 
-    resultPara.textContent = `${firstNonRepeatingChar}`;
+    resultPara.textContent = `${newString}`;
     e.target[0].value = "";
 }
 
