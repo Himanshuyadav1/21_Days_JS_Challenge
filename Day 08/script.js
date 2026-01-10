@@ -339,48 +339,83 @@
 // Solution 5:
 // -----------------
 
+// function handleSubmit(e) {
+//     e.preventDefault();
+
+//     const inputString = e.target[0].value;
+//     const resultPara = document.getElementById('result');
+//     const stringLength = inputString.length;
+//     let wordCount = 0;
+//     let startIndex = 0;
+//     let endIndex = 0;
+//     let char = "";
+//     let newWord;
+
+//     for (let i = 0; i < stringLength; i++) {
+//         char = inputString[i];
+
+//         if (char !== " " || i === stringLength - 1) {
+//             startIndex = i;
+//             break;
+//         }
+//     }
+
+//     for (let i = stringLength - 1; i > startIndex; i--) {
+//         char = inputString[i];
+
+//         if (char !== " ") {
+//             endIndex = i;
+//             break;
+//         }
+//     }
+
+//     for (let i = startIndex; i < endIndex; i++) {
+//         char = inputString[i];
+
+//         if ((char === " " || i === endIndex - 1) && newWord) {
+//             wordCount++;
+//             newWord = false;
+//         } else if (char !== " ") {
+//             newWord = true;
+//         }
+//     }
+
+//     resultPara.textContent = `${wordCount}`;
+//     e.target[0].value = "";
+// }
+
+// -----------------
+
+
+// Solution 6:
+// -----------------
+
 function handleSubmit(e) {
     e.preventDefault();
 
     const inputString = e.target[0].value;
     const resultPara = document.getElementById('result');
     const stringLength = inputString.length;
-    let wordCount = 0;
-    let startIndex = 0;
-    let endIndex = 0;
-    let char = "";
-    let newWord;
+    let allSubStrings = "";
+    let subStrings = "";
 
     for (let i = 0; i < stringLength; i++) {
-        char = inputString[i];
+        let char = inputString[i];
+        allSubStrings += char;
+        subStrings = char;
 
-        if (char !== " " || i === stringLength - 1) {
-            startIndex = i;
-            break;
+        for (let j = i + 1; j < stringLength; j++) {
+            subStrings += inputString[j];
+            allSubStrings += `, ${subStrings}`;
+        }
+
+        if (i !== stringLength - 1) {
+            allSubStrings += ", ";
+            subStrings = "";
         }
     }
 
-    for (let i = stringLength - 1; i > startIndex; i--) {
-        char = inputString[i];
-
-        if (char !== " ") {
-            endIndex = i;
-            break;
-        }
-    }
-
-    for (let i = startIndex; i < endIndex; i++) {
-        char = inputString[i];
-
-        if ((char === " " || i === endIndex - 1) && newWord) {
-            wordCount++;
-            newWord = false;
-        } else if (char !== " ") {
-            newWord = true;
-        }
-    }
-
-    resultPara.textContent = `${wordCount}`;
+    resultPara.textContent = `${allSubStrings}`;
     e.target[0].value = "";
 }
 
