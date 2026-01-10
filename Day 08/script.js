@@ -229,24 +229,61 @@
 // Solution 2:
 // -----------------
 
+// function handleSubmit(e) {
+//     e.preventDefault();
+
+//     const inputString = e.target[0].value;
+//     const resultPara = document.getElementById('result');
+//     const stringLength = inputString.length;
+//     let isOnlyContainAlphabet = true;
+
+//     for (let i = 0; i < stringLength; i++) {
+//         let charCode = inputString[i].charCodeAt();
+        
+//         if (!((charCode > 64 && charCode < 90) || (charCode > 96 && charCode < 123))) {
+//             isOnlyContainAlphabet = false;
+//             break;
+//         }
+//     }
+
+//     resultPara.textContent = `${isOnlyContainAlphabet ? 'True' : 'False'}`;
+//     e.target[0].value = "";
+// }
+
+// -----------------
+
+
+// Solution 3:
+// -----------------
+
 function handleSubmit(e) {
     e.preventDefault();
 
     const inputString = e.target[0].value;
     const resultPara = document.getElementById('result');
-    const stringLength = inputString.length;
-    let isOnlyContainAlphabet = true;
+    let stringLength = inputString.length;
+    let newString = "";
+    let wordEndingIndex = stringLength;  
 
-    for (let i = 0; i < stringLength; i++) {
-        let charCode = inputString[i].charCodeAt();
+    for (let i = stringLength - 1; i >= 0; i--) {
+        const char = inputString[i];
         
-        if (!((charCode > 64 && charCode < 90) || (charCode > 96 && charCode < 123))) {
-            isOnlyContainAlphabet = false;
-            break;
+        if (char === " " || i === 0) {
+            let wordStartingIndex = i ? i + 1 : 0;
+            while (wordStartingIndex < wordEndingIndex) {
+                newString += inputString[wordStartingIndex];
+                wordStartingIndex++;
+            }
+
+            wordEndingIndex = i;
+
+            if (i !== 0) {
+                newString += " ";
+            }
         }
     }
 
-    resultPara.textContent = `${isOnlyContainAlphabet ? 'True' : 'False'}`;
+    resultPara.textContent = `${newString}`;
     e.target[0].value = "";
 }
 
