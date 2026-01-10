@@ -202,24 +202,51 @@
 // Solution 1:
 // -----------------
 
+// function handleSubmit(e) {
+//     e.preventDefault();
+
+//     const inputString = e.target[0].value;
+//     const resultPara = document.getElementById('result');
+//     const stringLength = inputString.length;
+//     const characterCountObj = {};
+//     let newString = "";
+
+//     for (let i = 0; i < stringLength; i++) {
+//         characterCountObj[inputString[i]] = (characterCountObj[inputString[i]] || 0) + 1;
+
+//         if (characterCountObj[inputString[i]] === 1) {
+//             newString += inputString[i];
+//         }
+//     }
+
+//     resultPara.textContent = `${newString}`;
+//     e.target[0].value = "";
+// }
+
+// -----------------
+
+
+// Solution 2:
+// -----------------
+
 function handleSubmit(e) {
     e.preventDefault();
 
     const inputString = e.target[0].value;
     const resultPara = document.getElementById('result');
     const stringLength = inputString.length;
-    const characterCountObj = {};
-    let newString = "";
+    let isOnlyContainAlphabet = true;
 
     for (let i = 0; i < stringLength; i++) {
-        characterCountObj[inputString[i]] = (characterCountObj[inputString[i]] || 0) + 1;
-
-        if (characterCountObj[inputString[i]] === 1) {
-            newString += inputString[i];
+        let charCode = inputString[i].charCodeAt();
+        
+        if (!((charCode > 64 && charCode < 90) || (charCode > 96 && charCode < 123))) {
+            isOnlyContainAlphabet = false;
+            break;
         }
     }
 
-    resultPara.textContent = `${newString}`;
+    resultPara.textContent = `${isOnlyContainAlphabet ? 'True' : 'False'}`;
     e.target[0].value = "";
 }
 
