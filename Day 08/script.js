@@ -390,32 +390,62 @@
 // Solution 6:
 // -----------------
 
+// function handleSubmit(e) {
+//     e.preventDefault();
+
+//     const inputString = e.target[0].value;
+//     const resultPara = document.getElementById('result');
+//     const stringLength = inputString.length;
+//     let allSubStrings = "";
+//     let subStrings = "";
+
+//     for (let i = 0; i < stringLength; i++) {
+//         let char = inputString[i];
+//         allSubStrings += char;
+//         subStrings = char;
+
+//         for (let j = i + 1; j < stringLength; j++) {
+//             subStrings += inputString[j];
+//             allSubStrings += `, ${subStrings}`;
+//         }
+
+//         if (i !== stringLength - 1) {
+//             allSubStrings += ", ";
+//             subStrings = "";
+//         }
+//     }
+
+//     resultPara.textContent = `${allSubStrings}`;
+//     e.target[0].value = "";
+// }
+
+// -----------------
+
+
+// Solution 7:
+// -----------------
+
 function handleSubmit(e) {
     e.preventDefault();
 
     const inputString = e.target[0].value;
     const resultPara = document.getElementById('result');
     const stringLength = inputString.length;
-    let allSubStrings = "";
-    let subStrings = "";
+    let compressedStr = "";
+    let consecutiveCharCount = 1;
 
     for (let i = 0; i < stringLength; i++) {
         let char = inputString[i];
-        allSubStrings += char;
-        subStrings = char;
-
-        for (let j = i + 1; j < stringLength; j++) {
-            subStrings += inputString[j];
-            allSubStrings += `, ${subStrings}`;
-        }
-
-        if (i !== stringLength - 1) {
-            allSubStrings += ", ";
-            subStrings = "";
+        
+        if (inputString[i] === inputString[i + 1]) {
+            consecutiveCharCount++;
+        } else {
+            compressedStr += `${char}${consecutiveCharCount}`;
+            consecutiveCharCount = 1;
         }
     }
 
-    resultPara.textContent = `${allSubStrings}`;
+    resultPara.textContent = `${compressedStr}`;
     e.target[0].value = "";
 }
 
