@@ -1,0 +1,36 @@
+// Solution 1:
+// -----------------
+
+function handleSubmit(e) {
+    e.preventDefault();
+
+    const inputString = e.target[0].value;
+    const subString = e.target[1].value;
+    const resultPara = document.getElementById('result');
+    const stringLength = inputString.length;
+    const subStringLength = subString.length;
+    let isSubString;
+    let index;
+
+    for (let i = 0; i <= stringLength - subStringLength ; i++) {
+        isSubString = true;
+        
+        for (let j = 0; j < subStringLength; j++) {
+            
+            if (inputString[i + j] !== subString[j]) {
+                isSubString = false;
+                break;
+            }
+        }
+
+        if (isSubString) {
+            break;
+        }
+    }
+
+    resultPara.textContent = `${isSubString}`;
+    e.target[0].value = "";
+    e.target[1].value = "";
+}
+
+// -----------------
