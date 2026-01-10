@@ -256,34 +256,80 @@
 // Solution 3:
 // -----------------
 
+// function handleSubmit(e) {
+//     e.preventDefault();
+
+//     const inputString = e.target[0].value;
+//     const resultPara = document.getElementById('result');
+//     let stringLength = inputString.length;
+//     let newString = "";
+//     let wordEndingIndex = stringLength;  
+
+//     for (let i = stringLength - 1; i >= 0; i--) {
+//         const char = inputString[i];
+        
+//         if (char === " " || i === 0) {
+//             let wordStartingIndex = i ? i + 1 : 0;
+//             while (wordStartingIndex < wordEndingIndex) {
+//                 newString += inputString[wordStartingIndex];
+//                 wordStartingIndex++;
+//             }
+
+//             wordEndingIndex = i;
+
+//             if (i !== 0) {
+//                 newString += " ";
+//             }
+//         }
+//     }
+
+//     resultPara.textContent = `${newString}`;
+//     e.target[0].value = "";
+// }
+
+// -----------------
+
+
+// Solution 4:
+// -----------------
+
 function handleSubmit(e) {
     e.preventDefault();
 
     const inputString = e.target[0].value;
     const resultPara = document.getElementById('result');
     let stringLength = inputString.length;
-    let newString = "";
-    let wordEndingIndex = stringLength;  
+    let longestWord = "";
+    let longestWordLength = 0; 
+    let wordLength = 0;
+    let wordStartingIndex = 0;
+    let wordEndingIndex = 0;  
 
-    for (let i = stringLength - 1; i >= 0; i--) {
+    for (let i = 0; i < stringLength; i++) {
         const char = inputString[i];
-        
-        if (char === " " || i === 0) {
-            let wordStartingIndex = i ? i + 1 : 0;
-            while (wordStartingIndex < wordEndingIndex) {
-                newString += inputString[wordStartingIndex];
-                wordStartingIndex++;
-            }
 
-            wordEndingIndex = i;
+        if (char !== " " && i < stringLength) {
+            wordEndingIndex++;
+        }
 
-            if (i !== 0) {
-                newString += " ";
+        if (char === " " || i === stringLength - 1) {
+            wordLength = wordEndingIndex - wordStartingIndex;
+            
+            if (wordLength > longestWordLength) {
+                longestWordLength = wordLength;
+                longestWord = "";
+
+                while (wordStartingIndex < wordEndingIndex) {
+                    longestWord += inputString[wordStartingIndex];
+                    wordStartingIndex++;
+                }
             }
+            wordStartingIndex = i + 1;
+            wordEndingIndex++;
         }
     }
 
-    resultPara.textContent = `${newString}`;
+    resultPara.textContent = `${longestWord}`;
     e.target[0].value = "";
 }
 
