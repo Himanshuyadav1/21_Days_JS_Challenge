@@ -75,35 +75,74 @@
 // Solution 3:
 // -----------------
 
+// function handleSubmit(e) {
+//     e.preventDefault();
+
+//     const inputString = e.target[0].value;
+//     const subString = e.target[1].value;
+//     const resultPara = document.getElementById('result');
+//     const fullRotation = inputString + inputString;
+//     const fullRotationLength = fullRotation.length;
+//     const subStringLength = subString.length;
+//     let isRotationString;
+
+//     for (let i = 0; i <= fullRotationLength - subStringLength; i++) {
+//         isRotationString = true;
+
+//         for (let j = 0; j < subStringLength; j++) {
+//             if (fullRotation[i + j] !== subString[j]) {
+//                 isRotationString = false;
+//                 break;
+//             }
+//         }
+
+//         if (isRotationString) {
+//             break;
+//         }
+//     }
+    
+//     resultPara.textContent = `${isRotationString ? 'Rotation' : 'Not Rotation'}`;
+//     e.target[0].value = "";
+//     e.target[1].value = "";
+// }
+
+// -----------------
+
+
+// Practice Challenge
+
+// Solution :
+// -----------------
+
 function handleSubmit(e) {
     e.preventDefault();
 
     const inputString = e.target[0].value;
-    const subString = e.target[1].value;
     const resultPara = document.getElementById('result');
-    const fullRotation = inputString + inputString;
-    const fullRotationLength = fullRotation.length;
-    const subStringLength = subString.length;
-    let isRotationString;
+    const stringLength = inputString.length;
+    const wordsCountObj = {};
+    let char = "";
+    let word = "";
 
-    for (let i = 0; i <= fullRotationLength - subStringLength; i++) {
-        isRotationString = true;
+    for (let i = 0; i < stringLength; i++) {
+        let char = inputString[i];
 
-        for (let j = 0; j < subStringLength; j++) {
-            if (fullRotation[i + j] !== subString[j]) {
-                isRotationString = false;
-                break;
-            }
+        if (char != " ") {
+            word += char;
         }
 
-        if (isRotationString) {
-            break;
+        if (char === " " || i === stringLength - 1) {
+            wordsCountObj[word] = (wordsCountObj[word] || 0) + 1;
+            word = "";
         }
     }
-    
-    resultPara.textContent = `${isRotationString ? 'Rotation' : 'Not Rotation'}`;
+
+    resultPara.textContent = "{";
+    Object.entries(wordsCountObj).forEach(([key, value], i, arr) => {
+        resultPara.textContent += (i !== arr.length - 1 ? ` ${key}:${value},` : ` ${key}:${value} }`);
+    });
+
     e.target[0].value = "";
-    e.target[1].value = "";
 }
 
 // -----------------
