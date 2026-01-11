@@ -151,32 +151,57 @@
 // Solution 2:
 // -----------------
 
+// function handleSubmit(e) {
+//     e.preventDefault();
+
+//     const inputString = e.target[0].value;
+//     const resultPara = document.getElementById('result');
+//     const stringLength = inputString.length;
+//     let isPangram = false;
+//     const charCodeObj = {};
+//     let char = "";
+
+//     for (let i = 0; i < stringLength; i++) {
+//         char = inputString[i];
+
+//         if (char !== " ") {            
+//             for (let j = 65; j <= 90; j++) {
+//                 if (char.charCodeAt() === j || char.charCodeAt() === j + 32) {
+//                     charCodeObj[j] = (charCodeObj[j] || 0) + 1;
+//                     break;
+//                 }
+//             }
+//         }
+//     }
+
+//     isPangram = Object.keys(charCodeObj).length === 26;
+
+//     resultPara.textContent = `${isPangram ? 'Pangram' : 'Not Pangram'}`;
+//     e.target[0].value = "";
+// }
+
+// -----------------
+
+
+// Solution 3:
+// -----------------
+
 function handleSubmit(e) {
     e.preventDefault();
 
     const inputString = e.target[0].value;
     const resultPara = document.getElementById('result');
-    const stringLength = inputString.length;
-    let isPangram = false;
-    const charCodeObj = {};
-    let char = "";
-
-    for (let i = 0; i < stringLength; i++) {
-        char = inputString[i];
-
-        if (char !== " ") {            
-            for (let j = 65; j <= 90; j++) {
-                if (char.charCodeAt() === j || char.charCodeAt() === j + 32) {
-                    charCodeObj[j] = (charCodeObj[j] || 0) + 1;
-                    break;
-                }
-            }
+    const allWord = inputString.split(" ");
+    const totalWordCount = allWord.length;
+    const singleWord = [];
+    
+    for (let i = 0; i < totalWordCount; i++) {
+        if (!singleWord.includes(allWord[i])) {
+            singleWord.push(allWord[i]);
         }
     }
 
-    isPangram = Object.keys(charCodeObj).length === 26;
-
-    resultPara.textContent = `${isPangram ? 'Pangram' : 'Not Pangram'}`;
+    resultPara.textContent = singleWord.join(" ");
     e.target[0].value = "";
 }
 
