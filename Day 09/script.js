@@ -111,7 +111,44 @@
 
 // Practice Challenge
 
-// Solution :
+// Solution 1:
+// -----------------
+
+// function handleSubmit(e) {
+//     e.preventDefault();
+
+//     const inputString = e.target[0].value;
+//     const resultPara = document.getElementById('result');
+//     const stringLength = inputString.length;
+//     const wordsCountObj = {};
+//     let char = "";
+//     let word = "";
+
+//     for (let i = 0; i < stringLength; i++) {
+//         char = inputString[i];
+
+//         if (char != " ") {
+//             word += char;
+//         }
+
+//         if (char === " " || i === stringLength - 1) {
+//             wordsCountObj[word] = (wordsCountObj[word] || 0) + 1;
+//             word = "";
+//         }
+//     }
+
+//     resultPara.textContent = "{";
+//     Object.entries(wordsCountObj).forEach(([key, value], i, arr) => {
+//         resultPara.textContent += (i !== arr.length - 1 ? ` ${key}:${value},` : ` ${key}:${value} }`);
+//     });
+
+//     e.target[0].value = "";
+// }
+
+// -----------------
+
+
+// Solution 2:
 // -----------------
 
 function handleSubmit(e) {
@@ -120,28 +157,26 @@ function handleSubmit(e) {
     const inputString = e.target[0].value;
     const resultPara = document.getElementById('result');
     const stringLength = inputString.length;
-    const wordsCountObj = {};
+    let isPangram = false;
+    const charCodeObj = {};
     let char = "";
-    let word = "";
 
     for (let i = 0; i < stringLength; i++) {
-        let char = inputString[i];
+        char = inputString[i];
 
-        if (char != " ") {
-            word += char;
-        }
-
-        if (char === " " || i === stringLength - 1) {
-            wordsCountObj[word] = (wordsCountObj[word] || 0) + 1;
-            word = "";
+        if (char !== " ") {            
+            for (let j = 65; j <= 90; j++) {
+                if (char.charCodeAt() === j || char.charCodeAt() === j + 32) {
+                    charCodeObj[j] = (charCodeObj[j] || 0) + 1;
+                    break;
+                }
+            }
         }
     }
 
-    resultPara.textContent = "{";
-    Object.entries(wordsCountObj).forEach(([key, value], i, arr) => {
-        resultPara.textContent += (i !== arr.length - 1 ? ` ${key}:${value},` : ` ${key}:${value} }`);
-    });
+    isPangram = Object.keys(charCodeObj).length === 26;
 
+    resultPara.textContent = `${isPangram ? 'Pangram' : 'Not Pangram'}`;
     e.target[0].value = "";
 }
 
